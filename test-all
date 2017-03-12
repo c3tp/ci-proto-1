@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for test in tests/test-*
+do
+	output=$($test | diff tests/xpctd.$(basename $test) -) || {
+		echo "Unexpected output: $output"
+		exit 1
+	}
+done
